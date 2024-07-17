@@ -1,0 +1,23 @@
+*******Deep learning Popular******
+Amount of Data increased. Computer hardwares advanced(GPU, TPU). Python and Opensource ecosystem. Development of Frameworks(pytorch, tensorflow). Cloud services.
+
+************************************************************************************************************************************************************************************************************************
+*******What is a Neuron*******
+A neuron in deep learning is a basic unit in a neural network. It takes inputs, processes them using weights and a bias, and then produces an output through an activation function. 
+Neurons are organized in layers, allowing the network to learn complex patterns from data.
+
+Sure, let's break down the line:
+
+1. **Inputs**: Neurons receive data or signals. These inputs could be numbers representing features of the data, like pixel values in an image.
+
+2. **Weights**: Each input is multiplied by a weight, which is a parameter that the model learns. Think of weights as the importance given to each input. 
+
+3. **Bias**: After weighting the inputs, a bias is added. The bias is another parameter that helps the model fit the data better by shifting the activation function. 
+
+4. **Processing**: The neuron sums all the weighted inputs and the bias. Mathematically, this is represented as: 
+   
+   \[ \text{Sum} = (input_1 \times weight_1) + (input_2 \times weight_2) + \ldots + bias \]
+
+5. **Activation Function**: This sum is then passed through an activation function, which transforms it into the neuron's output. The activation function adds non-linearity, allowing the network to learn complex patterns. Common activation functions include ReLU (Rectified Linear Unit), sigmoid, and tanh.
+
+Putting it all together, a neuron processes inputs by weighting them, adding a bias, summing them up, and applying an activation function to produce an output.
