@@ -16,7 +16,7 @@ Sure, let's break down the line:
 
 4. **Processing**: The neuron sums all the weighted inputs and the bias. Mathematically, this is represented as: 
    
-   \[ \text{Sum} = (input_1 \times weight_1) + (input_2 \times weight_2) + \ldots + bias \]
+   {Sum} = (input_1 \times weight_1) + (input_2 \times weight_2) + bias
 
 5. **Activation Function**: This sum is then passed through an activation function, which transforms it into the neuron's output. The activation function adds non-linearity, allowing the network to learn complex patterns. Common activation functions include ReLU (Rectified Linear Unit), sigmoid, and tanh.
 
