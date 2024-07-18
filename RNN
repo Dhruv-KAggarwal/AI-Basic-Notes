@@ -1,0 +1,49 @@
+Recurrent Neural Networks (RNNs) are a class of artificial neural networks designed for processing sequences of data. 
+They are particularly well-suited for tasks where the data has a temporal or sequential structure, such as time series prediction, natural language processing, and speech recognition.
+
+### Key Features of RNNs
+
+1. **Sequential Data Processing**: RNNs process data sequences one step at a time, maintaining a hidden state that captures information about previous steps.
+
+2. **Hidden State**: The hidden state acts as a memory that captures information about previous inputs in the sequence, allowing the network to retain context and make more informed predictions.
+
+3. **Weight Sharing**: RNNs share weights across different time steps. This means the same set of weights is used for processing each element in the sequence, which helps in capturing temporal patterns in the data.
+
+### Basic Structure of an RNN
+
+An RNN can be visualized as a loop that allows information to be passed from one step of the network to the next. At each time step \( t \), 
+the RNN takes an input \( x_t \) and the hidden state from the previous time step \( h_{t-1} \), and produces a new hidden state \( h_t \):
+
+
+
+Here:
+- \( W_{xh} \) is the weight matrix for the input to hidden state.
+- \( W_{hh} \) is the weight matrix for the hidden state to hidden state.
+- \( b_h \) is the bias term.
+- \( \sigma \) is the activation function, typically a non-linearity such as tanh or ReLU.
+
+### Variants of RNNs
+
+1. **Long Short-Term Memory (LSTM)**:
+LSTMs address the problem of vanishing and exploding gradients in standard RNNs by introducing memory cells and gates that regulate the flow of information.
+These gates (input gate, forget gate, and output gate) allow the LSTM to maintain information over long sequences more effectively.
+
+2. **Gated Recurrent Unit (GRU)**: 
+GRUs are a simplified version of LSTMs with fewer gates (reset gate and update gate). They aim to achieve similar performance with less computational complexity.
+
+### Applications of RNNs
+
+1. **Language Modeling and Text Generation**: RNNs can predict the next word in a sentence, which is useful for applications like autocomplete and text generation.
+2. **Speech Recognition**: RNNs can convert spoken language into text by processing audio signals as sequences.
+3. **Time Series Prediction**: RNNs can predict future values in a sequence of data points, which is useful for applications like stock price forecasting and weather prediction.
+4. **Machine Translation**: RNNs can translate text from one language to another by encoding the source sentence and decoding it into the target language.
+
+### Challenges
+
+- **Vanishing and Exploding Gradients**: Training RNNs can be difficult due to the vanishing and exploding gradient problem, where gradients become too small or too large to effectively update the weights.
+- **Long-Term Dependencies**: Standard RNNs struggle with capturing long-term dependencies in sequences, which is why variants like LSTMs and GRUs are often used.
+
+### Conclusion
+
+RNNs are powerful tools for sequence modeling and have been instrumental in advancing the state-of-the-art in various applications involving sequential data. 
+While they come with their own set of challenges, innovations like LSTMs and GRUs have significantly mitigated some of these issues, making RNNs a vital component of modern deep learning architectures.
