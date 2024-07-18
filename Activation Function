@@ -1,0 +1,21 @@
+********Activation Function ********
+
+***Rectified Linear Unit (ReLU):***
+This function outputs the input directly if it is positive, and zero otherwise.
+It's the most commonly used activation function in hidden layers due to its simplicity and effectiveness in training deep neural networks.
+
+***Leaky ReLU:***
+This is a variant of ReLU that allows a small, non-zero gradient when the input is negative, addressing the "dying ReLU" problem where neurons can stop learning if they get stuck at zero during training.
+
+***Exponential Linear Unit (ELU):*** 
+Similar to ReLU but has a smoother output for negative values, which can speed up learning.
+
+***Sigmoid Function:*** 
+This function outputs values between 0 and 1, which can be interpreted as probabilities.
+It's smooth and differentiable, making it useful in the output layer for binary classification tasks.
+
+******************************************************************************************************************************************************************************************************************
+In summary, while both ReLU and sigmoid have their strengths and weaknesses,
+ReLU is generally favored for hidden layers in large-scale neural networks due to its efficiency and ability to address training challenges associated with deep architectures. 
+Sigmoid remains valuable in specific applications where its properties, such as producing output in the [0, 1] range for probabilities, are required.
+
