@@ -19,3 +19,11 @@ In summary, while both ReLU and sigmoid have their strengths and weaknesses,
 ReLU is generally favored for hidden layers in large-scale neural networks due to its efficiency and ability to address training challenges associated with deep architectures. 
 Sigmoid remains valuable in specific applications where its properties, such as producing output in the [0, 1] range for probabilities, are required.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Choosing Between Them:
+
+ReLU is a good default choice for hidden layers in most cases due to its simplicity and effectiveness, especially in large-scale neural networks.
+Leaky ReLU can be considered if you're facing issues with dying ReLU neurons and want a straightforward improvement over ReLU without adding significant computational overhead.
+ELU is recommended when you seek potentially higher accuracy and smoother gradients, and computational efficiency is not a primary concern.
+
+
