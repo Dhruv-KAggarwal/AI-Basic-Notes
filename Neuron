@@ -12,7 +12,14 @@ Sure, let's break down the line:
 
 2. **Weights**: Each input is multiplied by a weight, which is a parameter that the model learns. Think of weights as the importance given to each input. 
 
+The weights in a neural network are initialized to small random values and are iteratively updated during training through forward and backward propagation. 
+The goal is to adjust the weights to minimize the loss function, thereby improving the network's predictions.
+The process involves computing gradients of the loss with respect to the weights and using these gradients to update the weights through an optimization algorithm.
+
 3. **Bias**: After weighting the inputs, a bias is added. The bias is another parameter that helps the model fit the data better by shifting the activation function. 
+
+In summary, biases are initialized along with weights and are updated during training using optimization algorithms.
+The inclusion of biases improves the model's ability to learn and generalize from the data.
 
 4. **Processing**: The neuron sums all the weighted inputs and the bias. Mathematically, this is represented as: 
    
