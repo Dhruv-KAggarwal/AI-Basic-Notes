@@ -1,2 +1,0 @@
-In essence, the Bellman equation helps you determine the value of a state or an action by combining immediate rewards with the expected future rewards.
-It’s a foundational tool in reinforcement learning to help an agent make better decisions and learn optimal strategies.
