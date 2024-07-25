@@ -1,4 +1,6 @@
-In PyTorch, optimizers are used to update the model parameters based on the computed gradients during training. They play a crucial role in the optimization process by adjusting the learning rate and other hyperparameters to improve the model's performance. Here's a detailed overview of PyTorch optimizers and how to use them:
+In PyTorch, optimizers are used to update the model parameters based on the computed gradients during training.
+They play a crucial role in the optimization process by adjusting the learning rate and other hyperparameters 
+to improve the model's performance. Here's a detailed overview of PyTorch optimizers and how to use them:
 
 ### Common Optimizers in PyTorch
 

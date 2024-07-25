@@ -1,0 +1,128 @@
+Sure, let’s break down what callbacks are and how they can help you with some simple examples. Callbacks are like special hooks in your training loop that let you run custom code at certain points during training. They can save you time and effort by automating common tasks.
+
+### **1. ModelCheckpoint**
+
+**What It Does**: Saves your model’s weights during training, so you don’t lose your progress. It helps you keep the best version of your model based on a metric (e.g., validation loss).
+
+**Without Checkpointing**:
+You’d have to manually save your model’s state at certain points, which is easy to forget or might not be done optimally.
+
+**With ModelCheckpoint**:
+You just configure it, and it automatically saves the best model for you.
+
+**Example**:
+```python
+import pytorch_lightning as pl
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+class LitModel(pl.LightningModule):
+    def __init__(self):
+        super(LitModel, self).__init__()
+        self.layer = nn.Linear(10, 2)
+        self.loss_fn = nn.CrossEntropyLoss()
+
+    def forward(self, x):
+        return self.layer(x)
+
+    def training_step(self, batch, batch_idx):
+        x, y = batch
+        logits = self(x)
+        loss = self.loss_fn(logits, y)
+        return loss
+
+    def configure_optimizers(self):
+        return optim.Adam(self.parameters(), lr=1e-3)
+
+# Define your data loaders
+train_loader = ...
+val_loader = ...
+
+# ModelCheckpoint saves the model with the lowest validation loss
+checkpoint_callback = pl.callbacks.ModelCheckpoint(
+    monitor='val_loss',   # Metric to monitor
+    dirpath='checkpoints/',  # Directory to save the checkpoints
+    filename='best-model',  # Filename for the checkpoint
+    save_top_k=1,  # Save only the top k models based on the monitored metric
+    mode='min'  # Mode for monitoring (min for loss)
+)
+
+# Train the model with checkpointing
+trainer = pl.Trainer(callbacks=[checkpoint_callback])
+trainer.fit(model, train_loader, val_loader)
+```
+
+### **2. EarlyStopping**
+
+**What It Does**: Stops training if the model stops improving, saving time and preventing overfitting.
+
+**Without EarlyStopping**:
+You’d have to manually monitor your model’s performance and stop training when you notice it’s not improving.
+
+**With EarlyStopping**:
+It automatically stops training when the performance metric stops improving for a set number of epochs.
+
+**Example**:
+```python
+early_stopping_callback = pl.callbacks.EarlyStopping(
+    monitor='val_loss',  # Metric to monitor
+    patience=3,  # How many epochs to wait for improvement
+    mode='min'  # Mode for monitoring (min for loss)
+)
+
+# Train the model with early stopping
+trainer = pl.Trainer(callbacks=[early_stopping_callback])
+trainer.fit(model, train_loader, val_loader)
+```
+
+### **3. LearningRateMonitor**
+
+**What It Does**: Logs and monitors the learning rate during training, which can be helpful for debugging and understanding training dynamics.
+
+**Without LearningRateMonitor**:
+You’d have to manually log the learning rate and track it yourself.
+
+**With LearningRateMonitor**:
+It automatically logs the learning rate for you.
+
+**Example**:
+```python
+lr_monitor = pl.callbacks.LearningRateMonitor(logging_interval='step')
+
+# Train the model with learning rate monitoring
+trainer = pl.Trainer(callbacks=[lr_monitor])
+trainer.fit(model, train_loader, val_loader)
+```
+
+### **4. Custom Callbacks**
+
+**What It Does**: Allows you to run custom code at various points during training (e.g., print custom messages, log specific information).
+
+**Example**:
+```python
+class CustomCallback(pl.Callback):
+    def on_train_start(self, trainer, pl_module):
+        print("Training has started!")
+
+    def on_epoch_end(self, trainer, pl_module):
+        print(f"Epoch {trainer.current_epoch} has ended!")
+
+    def on_train_end(self, trainer, pl_module):
+        print("Training has ended!")
+
+custom_callback = CustomCallback()
+
+# Train the model with custom callback
+trainer = pl.Trainer(callbacks=[custom_callback])
+trainer.fit(model, train_loader, val_loader)
+```
+
+### Summary
+
+- **ModelCheckpoint**: Automatically saves the best model for you based on a performance metric.
+- **EarlyStopping**: Stops training early if the model’s performance doesn’t improve.
+- **LearningRateMonitor**: Logs the learning rate to help you understand training dynamics.
+- **Custom Callbacks**: Allows you to run custom code at specific points during training.
+
+By using callbacks, you can automate repetitive tasks, monitor your model’s performance, and focus more on developing and tuning your model.
