@@ -1,0 +1,83 @@
+Certainly! Here’s a concise summary of Batch Normalization and Layer Normalization:
+
+### **Batch Normalization (BN)**
+- **Normalizes**: Activations across the mini-batch.
+- **Advantages**: Speeds up training, reduces sensitivity to initialization, and can act as a regularizer.
+- **Best For**: Large batch sizes and feedforward/convolutional networks.
+
+### **Layer Normalization (LN)**
+- **Normalizes**: Activations across features for each individual sample.
+- **Advantages**: Works well with small or variable batch sizes and sequences.
+- **Best For**: Small batch sizes, RNNs, and situations where batch size varies.
+
+
+Here's how you can implement Batch Normalization and Layer Normalization in code using PyTorch.
+
+### **Batch Normalization**
+
+In PyTorch, Batch Normalization is implemented using `torch.nn.BatchNorm2d` for 2D convolutional layers or `torch.nn.BatchNorm1d` for fully connected layers. 
+
+#### **Example with 2D Convolutions:**
+
+```python
+import torch
+import torch.nn as nn
+
+class MyCNN(nn.Module):
+    def __init__(self):
+        super(MyCNN, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.bn1 = nn.BatchNorm2d(num_features=32)  # BatchNorm for 2D convolutions
+        self.relu = nn.ReLU()
+        self.fc = nn.Linear(in_features=32*28*28, out_features=10)  # Example fully connected layer
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.bn1(x)  # Apply Batch Normalization
+        x = self.relu(x)
+        x = x.view(x.size(0), -1)  # Flatten
+        x = self.fc(x)
+        return x
+
+# Example usage:
+model = MyCNN()
+input_tensor = torch.randn(16, 1, 28, 28)  # Batch of 16 images, 1 channel, 28x28 pixels
+output = model(input_tensor)
+```
+
+### **Layer Normalization**
+
+In PyTorch, Layer Normalization is implemented using `torch.nn.LayerNorm`. 
+
+#### **Example with Fully Connected Layers:**
+
+```python
+import torch
+import torch.nn as nn
+
+class MyMLP(nn.Module):
+    def __init__(self):
+        super(MyMLP, self).__init__()
+        self.fc1 = nn.Linear(in_features=784, out_features=512)
+        self.ln1 = nn.LayerNorm(normalized_shape=512)  # LayerNorm for fully connected layers
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(in_features=512, out_features=10)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.ln1(x)  # Apply Layer Normalization
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x
+
+# Example usage:
+model = MyMLP()
+input_tensor = torch.randn(16, 784)  # Batch of 16 samples, 784 features each
+output = model(input_tensor)
+```
+
+### **Summary**
+- **Batch Normalization** (`nn.BatchNorm2d`, `nn.BatchNorm1d`) is used to normalize activations across the mini-batch and is typically applied after convolutional layers or linear layers.
+- **Layer Normalization** (`nn.LayerNorm`) normalizes activations across the features of each individual sample and is useful for fully connected layers or sequence data.
+
+You can choose between these normalization techniques based on your specific use case and the type of network you're building.

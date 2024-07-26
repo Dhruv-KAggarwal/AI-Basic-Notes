@@ -1,4 +1,5 @@
-`torchvision` is a library that is part of the PyTorch project, designed specifically for handling image data. It provides utilities for image processing, datasets, and pre-trained models. Here's a detailed overview:
+`torchvision` is a library that is part of the PyTorch project, designed specifically for handling image data.
+ It provides utilities for image processing, datasets, and pre-trained models. Here's a detailed overview:
 
 ### Key Components of `torchvision`
 
@@ -116,4 +117,6 @@ plt.show()
 
 ### Summary
 
-`torchvision` is a powerful library for working with image data in PyTorch. It simplifies the process of loading datasets, applying transformations, and utilizing pre-trained models. Whether you're building a model from scratch or fine-tuning a pre-trained model, `torchvision` provides the tools needed to streamline your workflow.
+`torchvision` is a powerful library for working with image data in PyTorch. 
+It simplifies the process of loading datasets, applying transformations, and utilizing pre-trained models. 
+Whether you're building a model from scratch or fine-tuning a pre-trained model, `torchvision` provides the tools needed to streamline your workflow.

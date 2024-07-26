@@ -1,0 +1,96 @@
+Once your model is trained and evaluated, you can use it to make predictions on new, unseen images. Here’s a step-by-step guide on how to do this with a cancer detection model:
+
+### 1. **Save the Trained Model**
+
+Before using the model for inference, it's a good practice to save it after training.
+
+```python
+# Save the trained model
+torch.save(model.state_dict(), 'cancer_detection_model.pth')
+```
+
+### 2. **Load the Saved Model**
+
+To use the model later, load it from the saved state.
+
+```python
+# Define the model structure (same as during training)
+model = SimpleNN()
+
+# Load the trained model weights
+model.load_state_dict(torch.load('cancer_detection_model.pth'))
+model.eval()  # Set the model to evaluation mode
+```
+
+### 3. **Prepare New Images for Prediction**
+
+Preprocess new images in the same way as the training data. This typically involves resizing, normalization, and converting the image to a tensor.
+
+```python
+from PIL import Image
+from torchvision import transforms
+
+# Define the transformation (same as used during training)
+transform = transforms.Compose([
+    transforms.Resize((28, 28)),  # Resize if necessary
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))
+])
+
+def preprocess_image(image_path):
+    image = Image.open(image_path)
+    image = transform(image)
+    image = image.unsqueeze(0)  # Add batch dimension
+    return image
+```
+
+### 4. **Make Predictions**
+
+Pass the preprocessed image through the model to get predictions.
+
+```python
+# Load and preprocess the image
+image_path = 'path/to/new_image.jpg'
+image = preprocess_image(image_path)
+
+# Make a prediction
+with torch.no_grad():  # Disable gradient calculation
+    outputs = model(image)
+    _, predicted = torch.max(outputs, 1)
+
+# Print the result
+print(f'Predicted class: {predicted.item()}')
+```
+
+### 5. **Interpret the Results**
+
+The output of the model will be a tensor of logits or probabilities. Depending on your model’s design, you might need to interpret these outputs. 
+For binary classification (e.g., cancer vs. no cancer), the output might be a single value representing the probability of one of the classes.
+
+Here’s how you might handle a binary classification problem:
+
+```python
+# Example for binary classification
+def predict_cancer(image_path):
+    image = preprocess_image(image_path)
+    
+    with torch.no_grad():
+        outputs = model(image)
+        probabilities = torch.sigmoid(outputs)  # Apply sigmoid for binary classification
+        prediction = (probabilities > 0.5).int()  # Convert probabilities to class labels
+    
+    return prediction.item()
+
+# Use the function
+result = predict_cancer('path/to/new_image.jpg')
+print('Cancer detected' if result == 1 else 'No cancer detected')
+```
+
+### Summary
+
+1. **Save the Model**: Use `torch.save()` to save your trained model.
+2. **Load the Model**: Reload the model using `torch.load()` and set it to evaluation mode with `model.eval()`.
+3. **Preprocess New Images**: Apply the same preprocessing steps to new images as you did during training.
+4. **Make Predictions**: Pass the preprocessed image through the model and interpret the output.
+
+This workflow allows you to deploy your trained model for making predictions on new data. If you have any specific questions or need further details on any part of this process, feel free to ask!
