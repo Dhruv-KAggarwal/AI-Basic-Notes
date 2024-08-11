@@ -1,0 +1,41 @@
+Great! Let’s start with **Lecture 1** on **Basic Data Structures**, focusing on **Arrays** and **Linked Lists**. This foundational knowledge is crucial as it underpins more complex structures and algorithms.
+
+### **Lecture 1: Basic Data Structures**
+
+#### **1. Arrays**
+
+**Concept:**
+- An array is a collection of elements identified by index or key. It’s a fixed-size data structure where each element is stored in contiguous memory locations.
+
+**Key Operations:**
+- **Declaration**: Define an array and allocate memory.
+  ```java
+  int[] arr = new int[10]; // Array of 10 integers
+  ```
+- **Initialization**: Assign values to array elements.
+  ```java
+  arr[0] = 5; // Assign 5 to the first element
+  ```
+- **Traversal**: Access each element using a loop.
+  ```java
+  for (int i = 0; i < arr.length; i++) {
+      System.out.println(arr[i]);
+  }
+  ```
+- **Insertion**: Modify an element at a specific index.
+  ```java
+  arr[2] = 10; // Change the value of the third element to 10
+  ```
+- **Deletion**: To delete, set the element to a default value or shift elements (manual process).
+  ```java
+  arr[2] = 0; // Set the third element to 0
+  ```
+
+**Characteristics:**
+- **Fixed Size**: Once defined, the size cannot change.
+- **Efficient Access**: O(1) time complexity for access.
+- **Memory Usage**: Memory is allocated contiguously.
+
+**Use Cases:**
+- Storing multiple items of the same type.
+- Simple implementations where the size is known and fixed.

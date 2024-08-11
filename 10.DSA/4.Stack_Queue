@@ -1,0 +1,164 @@
+### **Lecture 3: Stacks and Queues**
+
+In this lecture, we'll cover two fundamental data structures often built using linked lists: **Stacks** and **Queues**. These structures are essential for many algorithms and applications.
+
+#### **1. Stack**
+
+**Overview:**
+A **Stack** is a linear data structure that follows the Last In, First Out (LIFO) principle. This means that the last item added to the stack is the first one to be removed. Think of it like a stack of plates: you add to the top and remove from the top.
+
+**Operations:**
+- **Push**: Add an element to the top of the stack.
+- **Pop**: Remove the element from the top of the stack.
+- **Peek**: Get the top element without removing it.
+- **IsEmpty**: Check if the stack is empty.
+
+**Stack Implementation Using Linked List:**
+
+**Node Class:**
+
+```java
+class StackNode {
+    int data;       // Data stored in the node
+    StackNode next; // Reference to the next node
+
+    StackNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+```
+
+**Stack Class:**
+
+```java
+class Stack {
+    StackNode top; // The top node in the stack
+
+    // Constructor to initialize an empty stack
+    Stack() {
+        top = null;
+    }
+
+    // Push a new element onto the stack
+    public void push(int data) {
+        StackNode newNode = new StackNode(data); // Create a new node
+        newNode.next = top; // Point new node to the current top
+        top = newNode;      // Update top to the new node
+    }
+
+    // Pop the top element off the stack
+    public int pop() {
+        if (top == null) throw new EmptyStackException(); // If the stack is empty
+        int data = top.data; // Get the data from the top node
+        top = top.next;      // Move top to the next node
+        return data;         // Return the data
+    }
+
+    // Peek at the top element without removing it
+    public int peek() {
+        if (top == null) throw new EmptyStackException(); // If the stack is empty
+        return top.data; // Return the data from the top node
+    }
+
+    // Check if the stack is empty
+    public boolean isEmpty() {
+        return top == null; // Return true if top is null
+    }
+}
+```
+
+**Key Points:**
+- **Push**: Adds a new node on top of the stack.
+- **Pop**: Removes the top node and returns its data.
+- **Peek**: Returns the data from the top node without changing the stack.
+- **IsEmpty**: Checks if there are no elements in the stack.
+
+#### **2. Queue**
+
+**Overview:**
+A **Queue** is a linear data structure that follows the First In, First Out (FIFO) principle. This means that the first item added to the queue will be the first one to be removed. Think of it like a queue at a ticket counter: people join the back and are served from the front.
+
+**Operations:**
+- **Enqueue**: Add an element to the end of the queue.
+- **Dequeue**: Remove the element from the front of the queue.
+- **Peek**: Get the front element without removing it.
+- **IsEmpty**: Check if the queue is empty.
+
+**Queue Implementation Using Linked List:**
+
+**Node Class:**
+
+```java
+class QueueNode {
+    int data;       // Data stored in the node
+    QueueNode next; // Reference to the next node
+
+    QueueNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+```
+
+**Queue Class:**
+
+```java
+class Queue {
+    QueueNode front; // The front node in the queue
+    QueueNode rear;  // The rear node in the queue
+
+    // Constructor to initialize an empty queue
+    Queue() {
+        front = null;
+        rear = null;
+    }
+
+    // Enqueue a new element to the end of the queue
+    public void enqueue(int data) {
+        QueueNode newNode = new QueueNode(data); // Create a new node
+        if (rear == null) { // If the queue is empty
+            front = newNode;
+            rear = newNode; // The new node is both the front and rear
+        } else {
+            rear.next = newNode; // Point the current rear to the new node
+            rear = newNode;      // Update rear to the new node
+        }
+    }
+
+    // Dequeue the front element from the queue
+    public int dequeue() {
+        if (front == null) throw new NoSuchElementException(); // If the queue is empty
+        int data = front.data; // Get the data from the front node
+        front = front.next;    // Move front to the next node
+        if (front == null) rear = null; // If the queue becomes empty, update rear to null
+        return data;           // Return the data
+    }
+
+    // Peek at the front element without removing it
+    public int peek() {
+        if (front == null) throw new NoSuchElementException(); // If the queue is empty
+        return front.data; // Return the data from the front node
+    }
+
+    // Check if the queue is empty
+    public boolean isEmpty() {
+        return front == null; // Return true if front is null
+    }
+}
+```
+
+**Key Points:**
+- **Enqueue**: Adds a new node to the rear of the queue.
+- **Dequeue**: Removes the front node and returns its data.
+- **Peek**: Returns the data from the front node without changing the queue.
+- **IsEmpty**: Checks if there are no elements in the queue.
+
+### **Summary**
+
+- **Stack**: Follows LIFO order with operations to push, pop, peek, and check if empty.
+- **Queue**: Follows FIFO order with operations to enqueue, dequeue, peek, and check if empty.
+
+These structures are fundamental in computer science and are used in various algorithms and applications. 
+Understanding their implementation and operations will help you solve problems efficiently. 
+Let me know if you have any questions or if you'd like to explore other topics!

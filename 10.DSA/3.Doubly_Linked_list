@@ -1,0 +1,201 @@
+### **Lecture 2: Linked List Variants**
+
+In this lecture, we’ll cover different types of linked lists and their specific features. Understanding these variants will give you a broader perspective on linked lists and their use cases. 
+
+#### **1. Doubly Linked List**
+
+**Overview:**
+A **Doubly Linked List** is a type of linked list where each node contains two references:
+- **Next**: Points to the next node in the list.
+- **Previous**: Points to the previous node in the list.
+
+This allows traversal in both directions.
+
+**Node Class:**
+
+```java
+class DoublyNode {
+    int data;        // Data stored in the node
+    DoublyNode next; // Reference to the next node
+    DoublyNode prev; // Reference to the previous node
+
+    // Constructor to initialize the node
+    DoublyNode(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+```
+
+**Doubly Linked List Class:**
+
+```java
+class DoublyLinkedList {
+    DoublyNode head; // The first node in the list
+    DoublyNode tail; // The last node in the list
+
+    // Constructor to initialize an empty list
+    DoublyLinkedList() {
+        head = null;
+        tail = null;
+    }
+
+    // Insert a new node at the beginning
+    public void insertAtHead(int data) {
+        DoublyNode newNode = new DoublyNode(data); // Create a new node
+        if (head == null) { // If the list is empty
+            head = newNode;
+            tail = newNode; // The new node is both the head and the tail
+        } else {
+            newNode.next = head; // Point new node to the current head
+            head.prev = newNode; // Update the current head's previous reference
+            head = newNode;      // Update head to the new node
+        }
+    }
+
+    // Insert a new node at the end
+    public void insertAtEnd(int data) {
+        DoublyNode newNode = new DoublyNode(data); // Create a new node
+        if (tail == null) { // If the list is empty
+            head = newNode;
+            tail = newNode; // The new node is both the head and the tail
+        } else {
+            tail.next = newNode; // Point the current tail to the new node
+            newNode.prev = tail; // Point the new node's previous reference to the current tail
+            tail = newNode;      // Update tail to the new node
+        }
+    }
+
+    // Delete the first occurrence of a node with given data
+    public void delete(int data) {
+        if (head == null) return; // If the list is empty
+
+        if (head.data == data) {  // If the node to delete is the head
+            head = head.next;    // Move head to the next node
+            if (head != null) head.prev = null; // Update previous reference of new head
+            else tail = null; // If the list becomes empty, update tail to null
+            return;
+        }
+
+        DoublyNode current = head; // Start from the head
+        while (current != null && current.data != data) { // Find the node to delete
+            current = current.next;
+        }
+
+        if (current != null) { // If the node was found
+            if (current.next != null) {
+                current.next.prev = current.prev; // Update the next node's previous reference
+            } else {
+                tail = current.prev; // If the node is the tail, update tail
+            }
+            if (current.prev != null) {
+                current.prev.next = current.next; // Update the previous node's next reference
+            }
+        }
+    }
+
+    // Print all nodes in the list from head to tail
+    public void printList() {
+        DoublyNode current = head; // Start from the head
+        while (current != null) { // Traverse until the end
+            System.out.print(current.data + " <-> "); // Print the data
+            current = current.next; // Move to the next node
+        }
+        System.out.println("null"); // Indicate the end of the list
+    }
+
+    // Print all nodes in the list from tail to head
+    public void printListReverse() {
+        DoublyNode current = tail; // Start from the tail
+        while (current != null) { // Traverse until the beginning
+            System.out.print(current.data + " <-> "); // Print the data
+            current = current.prev; // Move to the previous node
+        }
+        System.out.println("null"); // Indicate the start of the list
+    }
+}
+```
+
+**Key Points:**
+- **Insertion at Head**: Updates both `next` and `prev` references.
+- **Insertion at End**: Updates both `next` and `prev` references.
+- **Deletion**: Handles updates to `next` and `prev` references of neighboring nodes.
+- **Traversal**: Can be done in both forward and backward directions.
+
+#### **2. Circular Linked List**
+
+**Overview:**
+A **Circular Linked List** is a linked list where the last node points back to the first node, forming a circular structure.
+
+**Types:**
+- **Circular Singly Linked List**: Each node points to the next node, and the last node points to the first node.
+- **Circular Doubly Linked List**: Each node has two pointers (`next` and `prev`), and both the head and the tail are linked to each other.
+
+**Circular Singly Linked List Example:**
+
+**Node Class:**
+
+```java
+class CircularNode {
+    int data;
+    CircularNode next;
+
+    CircularNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+```
+
+**Circular Linked List Class:**
+
+```java
+class CircularLinkedList {
+    CircularNode head; // The first node in the list
+
+    // Constructor to initialize an empty list
+    CircularLinkedList() {
+        head = null;
+    }
+
+    // Insert a new node at the end
+    public void insertAtEnd(int data) {
+        CircularNode newNode = new CircularNode(data); // Create a new node
+        if (head == null) { // If the list is empty
+            head = newNode;
+            newNode.next = head; // Point new node to itself
+        } else {
+            CircularNode current = head;
+            while (current.next != head) { // Traverse until the node before head
+                current = current.next;
+            }
+            current.next = newNode; // Append new node
+            newNode.next = head;   // Point new node to head, forming a circle
+        }
+    }
+
+    // Print all nodes in the list
+    public void printList() {
+        if (head == null) return; // If the list is empty, do nothing
+
+        CircularNode current = head; // Start from the head
+        do {
+            System.out.print(current.data + " -> "); // Print the data
+            current = current.next; // Move to the next node
+        } while (current != head); // Stop when we circle back to the head
+        System.out.println("...");
+    }
+}
+```
+
+**Key Points:**
+- **Insertion**: Adds nodes and updates pointers to maintain circular structure.
+- **Traversal**: Use `do-while` loop to handle circular nature.
+
+### **Summary**
+
+- **Doubly Linked List**: Nodes have references to both the next and previous nodes, allowing bidirectional traversal.
+- **Circular Linked List**: The last node points back to the first node, forming a loop.
+
+Understanding these variants will help you choose the right type of linked list based on your requirements. Let me know if you have any questions or if there’s a specific topic you’d like to delve into further!
