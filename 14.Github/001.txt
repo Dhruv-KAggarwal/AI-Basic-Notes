@@ -1,0 +1,33 @@
+Space issues ,
+time issues ,
+history of project like to revert the changes in or version control , 
+keep the track of the roject like which advancement took on which day or date,
+roll back.
+
+History of Github:
+
+1. Local Version Control System(data is stored in local pc)(machine gone everything gone)
+2. Centralised Version Control Sytem(centre machine and local machine)(central system gone everything gone)
+3. Distributed Version Control System (Github like  stored in pc of all team mebers and in cloud server also)
+
+
+
+1. Git
+Definition: Git is a distributed version control system (VCS). It allows you to track changes in your code, collaborate with others, and revert to previous versions if needed.
+Features:
+Local Control: Git operates on your local machine. You don't need the internet to work with Git since it keeps a local repository on your computer.
+Branching: Git allows you to create branches to develop features in isolation and then merge them back into the main project.
+Speed: Since everything happens locally, operations like committing and branching are super fast.
+Use Case: Git is useful when you need to track changes in files, especially in coding projects. It’s widely used in software development.
+2. GitHub
+Definition: GitHub is a cloud-based platform built around Git that offers additional features for collaboration, code hosting, and project management.
+Key Features:
+Code Hosting: GitHub allows you to store your Git repositories in the cloud, making them accessible to collaborators or the public.
+Collaboration Tools: It has features like pull requests, issues, code reviews, and project boards to facilitate team collaboration.
+CI/CD: GitHub Actions allows you to automate tasks like testing, deployment, and continuous integration.
+Open-Source Community: GitHub hosts millions of open-source projects, making it a popular hub for open-source development.
+Use Case: GitHub is ideal for developers who want to host their Git repositories online and collaborate on projects with others.
+
+
+
+History , Tracking , Rollback , Collaboration, 
